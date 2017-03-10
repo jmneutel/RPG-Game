@@ -41,6 +41,9 @@ var characterList = [	{
 var winCounter = 0;
 var lossCounter = 0;
 var clicks = 0;
+var locked = false;
+var beginLock = false;
+var attackLock = true;
 
 $('#winCounter').html("<h2>Wins: " + winCounter + "</h2>");
 $('#lossCounter').html("<h3>Losses: " + lossCounter + "</h3>");
@@ -49,6 +52,8 @@ function startGame() {
 
 	clicks = 0;
 	locked = false;
+	beginLock = false;
+	attackLock = true;
 	$('#the_chosen_one').empty();
 	$('#enemies').empty();
 	$('#defender').empty();
@@ -85,6 +90,7 @@ $("#char-init").on("click", ".character", function() {
 
 $("#start").on("click", function() { 
 
+if(!beginLock){
 	var enemies = $('#char-init').children();
 	var addId = $('#the_chosen_one').children();
 	addId.attr("id", "attacker");
@@ -94,7 +100,9 @@ $("#start").on("click", function() {
 	addThirdId.attr("id", "aPChange");
 	$('#enemies').append(enemies);
 	console.log(enemies);
+	beginLock = true;
 
+}
 	
 });
 
@@ -108,18 +116,21 @@ if(!locked){
 }
 
 });
-var locked = false;
+
 $("#defender-chosen").on("click", function(){
 	locked = true;
 	var addId = $('#defender').children();
 	addId.attr("id", "defense");
 	var addSecId = $('#defender').find("span:first");
 	addSecId.attr("id", "dHChange");
+	attackLock = false;
+
 
 });
 
 $("#attack").on("click", function() {
 
+if (!attackLock) {
 	var attackerLife = $('#attacker').attr("data-hp") - $('#defense').attr("data-attack");
 	var defenderLife = $('#defense').attr("data-hp") - $('#attacker').attr("data-attack");
 	$('#attacker').attr("data-hp", attackerLife);
@@ -140,6 +151,7 @@ $("#attack").on("click", function() {
 
 		$('#defender').html("");
 		locked = false;
+		attackLock = true;
 
 	}
 
@@ -167,7 +179,7 @@ $("#attack").on("click", function() {
 
 	clicks++;
 	console.log(attackerLife);
-
+}
 
 });
 
