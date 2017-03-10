@@ -31,7 +31,7 @@ var characterList = [	{
 
 							HP: 100,
 							Attack: 8,
-							Image: "<img class='img' src='images/Jigglypuff.gif' alt='Jiggly-Puff'>",
+							Image: "<img class='img' src='images/jigglypuff.png' alt='Jiggly-Puff'>",
 							Name: "Jiggly-Puff"
 							
 						},
