@@ -1,75 +1,173 @@
-var characterList = ["pikachu", "charizard", "blastoise", "venusaur"];
-var chosenHealth;
-var chosenAttack;
-var pikachu = false;
-var characterPicked;
-var charizard = false;
-var blastoise = false;
-var jigglypuff = false;
-var winCounter;
-var lossCounter;
-var damage;
-var originalAttack;
+var characterList = [	{
+
+							HP: 150,
+							Attack: 8,
+							Image: "<img class='pikachu' src='images/pikachu.png' alt='Pikachu'>",
+							Name: "Pikachu"
+						
+
+						},
+
+						{
+
+							HP: 100,
+							Attack: 14,
+							Image: "<img class='charizard' src='images/charizard.png' alt='Charizard'>",
+							Name: "Charizard"
+							
+
+						},
+
+						{
+
+							HP: 180,
+							Attack: 7,
+							Image: "<img class='blastoise' src='images/blastoise.png' alt='Blastoise'>",
+							Name: "Blastoise"
+							
+						},	
+
+				 		{
+
+							HP: 100,
+							Attack: 8,
+							Image: "<img class='jiggly' src='images/jigglypuff.png' alt='Jiggly-Puff'>",
+							Name: "Jiggly-Puff"
+							
+						},
+
+					];
+
+var winCounter = 0;
+var lossCounter = 0;
+var clicks = 0;
+
+$('#winCounter').html("<h2>Wins: " + winCounter + "</h2>");
+$('#lossCounter').html("<h3>Losses: " + lossCounter + "</h3>");
 
 function startGame() {
 
-	$(".pikachu").html('<img class="pikachu" src="images/pikachu.jpg" alt="Pikachu">');
+	clicks = 0;
+	locked = false;
+	$('#the_chosen_one').empty();
+	$('#enemies').empty();
+	$('#defender').empty();
 
-
+for (var i = 0; i < characterList.length; i++){
+	var initial = $("<div class='character'>");
+	initial.append("<h4>" + characterList[i].Name + "</h4>");
+	initial.append(characterList[i].Image);
+	initial.attr("data-hp", characterList[i].HP);
+	initial.attr("data-attack", characterList[i].Attack);
+	var hp = initial.data("hp");
+	var attack = initial.data("attack");
+	initial.append("<p>HP: <span>" + hp + "</span></p>");
+	initial.append("<p>Attack: <span>" + attack + "</span></p>")
+	$("#char-init").append(initial);
 }
+
+};
 
 startGame();
 
-function chooseCharater() {
+$("#char-init").on("click", ".character", function() { 
 
-	var pikachu = false;
+	var curChosen = $('#the_chosen_one').children();
+	console.log(curChosen);
+	$("#char-init").append(curChosen);
 
-	$(".pikachu").on("click", function() { 
-		pikachu === true;
+	var characterPicked = $(this);
+	$("#the_chosen_one").append(characterPicked);
+
+
+
+	});
+
+$("#start").on("click", function() { 
+
+	var enemies = $('#char-init').children();
+	var addId = $('#the_chosen_one').children();
+	addId.attr("id", "attacker");
+	var addSecId = $('#attacker').find("span:first");
+	addSecId.attr("id", "aHChange");
+	var addThirdId = $('#attacker').find("span:last");
+	addThirdId.attr("id", "aPChange");
+	$('#enemies').append(enemies);
+	console.log(enemies);
 
 	
+});
 
-	if (pikachu === true){
-		$(".pikachu").html("");
-		$("#the_chosen_one").html('<img src="images/pikachu.jpg" alt="Pikachu">');
-		chosenHealth === 60;
-		chosenAttack === 10;
-		
-	}else if (charizard === true){
+$("#enemies").on("click", ".character", function(){
+if(!locked){
+	var defenderClicked = $('#defender').children();
+	$('#enemies').append(defenderClicked);
 
-		chosenHealth === 120;
-		chosenAttack === 100;
+	var defenderPicked = $(this);
+	$('#defender').append(defenderPicked);
+}
 
-	}else if (blastoise === true){
+});
+var locked = false;
+$("#defender-chosen").on("click", function(){
+	locked = true;
+	var addId = $('#defender').children();
+	addId.attr("id", "defense");
+	var addSecId = $('#defender').find("span:first");
+	addSecId.attr("id", "dHChange");
 
-		chosenHealth === 100;
-		chosenAttack === 40;
+});
 
-	}else if (jigglypuff === true){
+$("#attack").on("click", function() {
 
-		chosenHealth === 50;
-		chosenAttack === 40;
+	var attackerLife = $('#attacker').attr("data-hp") - $('#defense').attr("data-attack");
+	var defenderLife = $('#defense').attr("data-hp") - $('#attacker').attr("data-attack");
+	$('#attacker').attr("data-hp", attackerLife);
+	$('#aHChange').html(attackerLife);
+	$('#defense').attr("data-hp", defenderLife);
+	$('#dHChange').html(defenderLife);
+
+	if (clicks >= 1) {
+
+		var attackerPower = (Math.ceil ($('#attacker').attr("data-attack") * 1.2));
+		$('#attacker').attr("data-attack", attackerPower);
+		$('#aPChange').html(attackerPower);
 
 	}
 
-	if (pikachu = true){
+
+	if (defenderLife <= 0) {
+
+		$('#defender').html("");
+		locked = false;
+
+	}
+
+	if (attackerLife <= 0) {
+
+		lossCounter++;
+		$('#lossCounter').html("<h2>Losses: " + lossCounter + "</h2>");
+		console.log(lossCounter);
+		console.log('You lose!');
+		alert('You lose!');
+		startGame();
+
+	}
+
+	if (attackerLife > 0 &&  $('#enemies').is(':empty') && $('#defender').is(':empty') ) {
 		
-	}else if (charizard = true){
-		$(".charizard").html("");
-		$("#the_chosen_one").html('<img class="charizard" src="" alt="Charizard">');
-	}else if (blastoise = true){
-		$(".blastoise").html("");
-		$("#the_chosen_one").html('<img class="blastoise" src="" alt="Blastoise">');
-	}else if (jigglypuff = true){
-		$(".jiggly").html("");
-		$("#the_chosen_one").html('<img class="jiggly" src="" alt="Jiggly-Puff">');
-	};
+		winCounter++;
+		$('#winCounter').html("<h2>Wins: " + winCounter + "</h2>");
+		console.log(winCounter);
+		console.log('You Win!');
+		alert('You Win!');
+		startGame();
+
+	} 
+
+	clicks++;
+	console.log(attackerLife);
 
 
 });
-};
-
-
-chooseCharater();
-console.log(chooseCharater);
 
