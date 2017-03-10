@@ -13,19 +13,59 @@
 	</head>
 	<body>
 	<h1 class="text-center">Pokemon RPG</h1>
-	<div id="char-init"></div>
-	
-	<h2 class="your_character">Your Character: <span id="the_chosen_one"></span></h2>
-	<button id="start">Click to pick character!</button>
-	<h3>Enemies: <span id="enemies"></span></h3>
-	<button id="defender-chosen">Click to lock in defender</button>
-	<button id="attack">Click to attack</button>
-	<h3>Defender: <span id="defender"></span></h3>
-	<div id="winCounter"></div>
-	<div id="lossCounter"></div>
-
-
-
+	<div class="container"></div>
+	<div class="row">
+		<div id="char-init" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2 class="your_character">Your Character: </h2>
+		</div>	
+	</div>
+	<div class="row">
+		<span id="the_chosen_one"></span>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button id="start">Click to pick character!</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h3>Enemies:</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<span id="enemies"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<button id="defender-chosen">Click to lock in defender</button>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<button id="attack">Click to attack</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h3>Defender:</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<span id="defender"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<div id="winCounter"></div>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<div id="lossCounter"></div>	
+		</div>
+	</div>
 
 		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
