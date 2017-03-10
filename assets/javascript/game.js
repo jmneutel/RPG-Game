@@ -2,7 +2,7 @@ var characterList = [	{
 
 							HP: 150,
 							Attack: 8,
-							Image: "<img class='pikachu' src='images/pikachu.png' alt='Pikachu'>",
+							Image: "<img class='img' src='images/pikachu.gif' alt='Pikachu'>",
 							Name: "Pikachu"
 						
 
@@ -12,7 +12,7 @@ var characterList = [	{
 
 							HP: 100,
 							Attack: 14,
-							Image: "<img class='charizard' src='images/charizard.png' alt='Charizard'>",
+							Image: "<img class='img' src='images/charizard.gif' alt='Charizard'>",
 							Name: "Charizard"
 							
 
@@ -22,7 +22,7 @@ var characterList = [	{
 
 							HP: 180,
 							Attack: 7,
-							Image: "<img class='blastoise' src='images/blastoise.png' alt='Blastoise'>",
+							Image: "<img class='img' src='images/blastoise.gif' alt='Blastoise'>",
 							Name: "Blastoise"
 							
 						},	
@@ -31,7 +31,7 @@ var characterList = [	{
 
 							HP: 100,
 							Attack: 8,
-							Image: "<img class='jiggly' src='images/jigglypuff.png' alt='Jiggly-Puff'>",
+							Image: "<img class='img' src='images/Jigglypuff.gif' alt='Jiggly-Puff'>",
 							Name: "Jiggly-Puff"
 							
 						},
@@ -66,8 +66,8 @@ for (var i = 0; i < characterList.length; i++){
 	initial.attr("data-attack", characterList[i].Attack);
 	var hp = initial.data("hp");
 	var attack = initial.data("attack");
-	initial.append("<p>HP: <span>" + hp + "</span></p>");
-	initial.append("<p>Attack: <span>" + attack + "</span></p>")
+	initial.append("<p class='title'>HP: <span>" + hp + "</span></p>");
+	initial.append("<p class='title'>Attack: <span>" + attack + "</span></p>")
 	$("#char-init").append(initial);
 }
 
@@ -182,4 +182,3 @@ if (!attackLock) {
 }
 
 });
-
